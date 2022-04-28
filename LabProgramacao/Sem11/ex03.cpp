@@ -5,13 +5,13 @@ existência de elementos iguais a 30, mostrando as posições em que apareceram.
  	
  	int vetor[15];
  	
-    printf("Digite 15 elementos inteiros:\n");
- 	for(int i = 0;i < 15;i++){
+   printf("Digite 15 elementos inteiros:\n");
+   for(int i = 0;i < 15;i++){
          scanf("%i",&vetor[i]);
          if(vetor[i] == 30){
-             printf("Posicao: %d \n", i);
+            printf("Posicao: %d \n", i);
          }
-    }
+   }
 
  	
  }

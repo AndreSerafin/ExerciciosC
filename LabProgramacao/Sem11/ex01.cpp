@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <locale.h>
-/*FaÃ§a um programa que preencha um vetor com seis elementos numÃ©ricos inteiros, calcule mostre:
+/*Faça um programa que preencha um vetor com seis elementos numéricos inteiros, calcule mostre:
 
-todos os nÃºmeros pares;
-a quantidade de nÃºmeros pares;
-todos os nÃºmeros Ã­mpares;
-a quantidade de nÃºmeros Ã­mpares.*/
+todos os números pares;
+a quantidade de números pares;
+todos os números ímpares;
+a quantidade de números ímpares.*/
 
 main(){
 	
