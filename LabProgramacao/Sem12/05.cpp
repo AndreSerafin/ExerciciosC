@@ -35,7 +35,7 @@ float acharMenor(float nota[lin][col], int n, int m){
     
 
     for(int i = 0; i < n; i++){
-        printf("Aluno %d, Menor nota: %.2f \n", i+1,vetMenor[i]);
+        printf("Aluno %d,   Menor nota: %.2f \n", i+1,vetMenor[i]);
         
     }
 
