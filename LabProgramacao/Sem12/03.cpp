@@ -19,7 +19,7 @@ int ordemDecrescente(int *vet1, int *vet2){
 
     for(int i = 0; i < tam * 2; i++){
         for(int j = 0; j < tam * 2; j++){
-            if(vet3[i] < vet3[j]){
+            if(vet3[i] > vet3[j]){
                 int aux = vet3[i];
                 vet3[i] = vet3[j];
                 vet3[j] = aux;
