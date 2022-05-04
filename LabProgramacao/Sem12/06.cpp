@@ -26,7 +26,7 @@ int diagPrincipal(int matriz[tam][tam], int n){
 
 int diagSecundaria(int matriz[tam][tam], int n){
 
-    printf("Diagonal Principal e Secundaria:\n\n");
+    printf("Diagonal Secundaria:\n\n");
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
             if(i + j == n - 1){
@@ -45,7 +45,7 @@ int diagSecundaria(int matriz[tam][tam], int n){
 
 int diagSecPrinc(int matriz[tam][tam], int n){
 
-    printf("Diagonal Secundaria:\n\n");
+    printf("Diagonal Principal e Secundaria:\n\n");
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){           
             if(i == j){
