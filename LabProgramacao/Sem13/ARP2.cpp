@@ -21,8 +21,8 @@ void somaDiag(int n, int **numeros){
 }
 
 void liberaMatriz(int l, int **nums){
-  int i;
-  for(i=0;i<l;i++){
+  
+  for(int i = 0; i < l;i++){
     free(nums[i]);
   }
   free(nums);
@@ -35,7 +35,7 @@ main(){
     scanf("%d",&tam);
     int **nums;
     int i,j;
-
+    
     nums = (int**)malloc(tam*sizeof(int*));
 
     for(i=0;i<tam;i++){
