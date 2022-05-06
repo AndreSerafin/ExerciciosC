@@ -1,10 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void somaDiag(int n, int **numeros);
-void liberaMatriz(int l, int **nums);
+void somaDiag(int n, int **numeros){
 
+    int soma = 0;
 
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n;j++){
+            if(j >= n - i){
+                printf("%d ",numeros[i][j]);
+                soma += numeros[i][j];
+            }else{
+                printf("  ");
+            }
+        }
+        printf("\n");
+    }
+
+    printf("Soma dos elementos abaixo da diagonal secundaria: %d", soma);
+}
+
+void liberaMatriz(int l, int **nums){
+  int i;
+  for(i=0;i<l;i++){
+    free(nums[i]);
+  }
+  free(nums);
+}
 
 main(){
     int tam;
@@ -41,29 +63,3 @@ main(){
     liberaMatriz(tam, nums);
 }
 
-void somaDiag(int n, int **numeros){
-
-    int soma = 0;
-
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n;j++){
-            if(j >= n - i){
-                printf("%d ",numeros[i][j]);
-                soma += numeros[i][j];
-            }else{
-                printf("  ");
-            }
-        }
-        printf("\n");
-    }
-
-    printf("Soma dos elementos abaixo da diagonal secundaria: %d", soma);
-}
-
-void liberaMatriz(int l, int **nums){
-  int i;
-  for(i=0;i<l;i++){
-    free(nums[i]);
-  }
-  free(nums);
-}
