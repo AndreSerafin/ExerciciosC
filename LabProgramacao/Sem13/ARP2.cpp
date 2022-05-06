@@ -51,7 +51,6 @@ main(){
     }
 
     printf("\nMatriz digitada\n");
-    printf("Preencha a matriz %d x %d\n",tam,tam);
     for(i = 0; i < tam; i++){
         for(j = 0; j < tam; j++){
             printf("%d ", nums[i][j]);
