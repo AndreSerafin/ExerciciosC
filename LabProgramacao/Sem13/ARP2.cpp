@@ -1,3 +1,5 @@
+//André Pereira dos Santos Serafin
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -40,7 +42,7 @@ main(){
 
     for(i=0;i<tam;i++){
      nums[i] = (int*)malloc(tam*sizeof(int));
-  }
+    }
 
     
     printf("Preencha a matriz %d x %d\n",tam,tam);
