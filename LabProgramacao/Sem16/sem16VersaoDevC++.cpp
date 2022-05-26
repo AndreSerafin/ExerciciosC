@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <string.h>
-#define MAX 
-/*Faça um programa que realize o cadastro de contas bancárias com as seguintes informações:número
-da conta,nome do cliente e saldo.Obanco permitiráo cadastramento de apenas 15 contas e não poderá 
-haver mais que uma conta como mesmo número. Crie o menu de opções a seguir.
-Menu de opções:
+#include <locale.h>
+#define MAX 15
+/*Fa�a um programa que realize o cadastro de contas banc�rias com as seguintes informa��es:n�mero
+da conta,nome do cliente e saldo.Obanco permitir�o cadastramento de apenas 15 contas e n�o poder� 
+haver mais que uma conta como mesmo n�mero. Crie o menu de op��es a seguir.
+Menu de op��es:
 1. Cadastrar contas.
 2. Visualizar todas as contas de determinado cliente.
-3. Excluir a conta com menor saldo(supondo a não existência de saldos iguais).
+3. Excluir a conta com menor saldo(supondo a n�o exist�ncia de saldos iguais).
 4. Sair.*/
 
     typedef struct {
@@ -20,11 +21,11 @@ Menu de opções:
 
         Contas c;
 
-        printf("\nDigite o nome do titular: \n ► ");
+        printf("\nDigite o nome do titular: \n  ");
         scanf("%s", &c.titular);
-        printf("Digite o numero da conta: \n ► ");
+        printf("Digite o numero da conta: \n  ");
         scanf("%d", &c.numConta);
-        printf("Digite o saldo da conta: \n ► R$ ");
+        printf("Digite o saldo da conta: \n  R$ ");
         scanf("%f", &c.saldo);
         
         return c;
@@ -36,11 +37,11 @@ Menu de opções:
         
         do{
 
-        printf("\n╭─────────────────────────────────────────────╮\n");
-        printf("│         0. Voltar ao menu anterior:         │\n");
-        printf("│        1. Vizualizar todas as contas:       │\n");
-        printf("│ 2. Vizualizar as contas de um unico cliente:│\n");
-        printf("╰─────────────────────────────────────────────╯\n\n");
+        printf("\n|---------------------------------------------|\n");
+        printf("|         0. Voltar ao menu anterior:         |\n");
+        printf("|        1. Vizualizar todas as contas:       |\n");
+        printf("| 2. Vizualizar as contas de um unico cliente:|\n");
+        printf("|---------------------------------------------|\n\n");
 
         scanf("%d", &op);
 
@@ -48,20 +49,20 @@ Menu de opções:
             case 1:
                 for (int i = 0; i < MAX; i++) {
                 printf("\nTitular: %s\n", c[i].titular);
-                printf(" • Numero da conta: %d\n", c[i].numConta);
-                printf(" • Saldo R$: %.2f\n", c[i].saldo);
+                printf("  Numero da conta: %d\n", c[i].numConta);
+                printf("  Saldo R$: %.2f\n", c[i].saldo);
 
                 }
             break;
             case 2:
                 char nome[50];
-                printf("\nDigite o nome do titular: \n ► ");
+                printf("\nDigite o nome do titular: \n ? ");
                 scanf("%s",nome);
                 for (int i = 0; i < MAX; i++) {
                         if(strcmp (c[i].titular, nome) == 0){
                             printf("\nTitular: %s\n", c[i].titular);
-                            printf(" • Numero da conta: %d\n", c[i].numConta);
-                            printf(" • Saldo R$: %.2f\n", c[i].saldo);
+                            printf("  Numero da conta: %d\n", c[i].numConta);
+                            printf("  Saldo R$: %.2f\n", c[i].saldo);
                         }
                 }
             break;
@@ -78,19 +79,20 @@ Menu de opções:
 
     main() {
         
+        setlocale(LC_ALL, "Portuguese");
         
         int op;
         Contas conta[MAX];
         int cont = 0;
 
         do {
-            printf("\n╭─────────────────────────────────────────────╮\n");
-                printf("│               Menu de opções:               │\n");
-                printf("│          0. Finalizar programa:             │\n");
-                printf("│           1. Cadastrar contas:              │\n");
-                printf("│      2. Visualizar contas dos clientes:     │\n");
-                printf("│     3. Excluir a conta com o menor saldo:   │\n");
-                printf("╰─────────────────────────────────────────────╯\n\n");
+            printf("\n|---------------------------------------------|\n");
+                printf("|               Menu de op��es:               |\n");
+                printf("|          0. Finalizar programa:             |\n");
+                printf("|           1. Cadastrar contas:              |\n");
+                printf("|      2. Visualizar contas dos clientes:     |\n");
+                printf("|     3. Excluir a conta com o menor saldo:   |\n");
+                printf("|---------------------------------------------|\n\n");
 
             scanf("%d", &op);
 
@@ -103,7 +105,7 @@ Menu de opções:
                 break;
                 case 2:
                     if(cont == 0){
-                        printf("\nNenhuma conta cadastrada até o momento!\n");
+                        printf("\nNenhuma conta cadastrada at� o momento!\n");
                         break;
                     }else{
 
@@ -112,13 +114,13 @@ Menu de opções:
                     }
                 case 3:
                     if(cont == 0){
-                        printf("\nNenhuma conta cadastrada até o momento!\n");
+                        printf("\nNenhuma conta cadastrada at� o momento!\n");
                         break;
                     }else{
                         
                         int menor;
                         char nome[50];
-                        printf("\nDigite o nome do titular: \n ► ");
+                        printf("\nDigite o nome do titular: \n ? ");
                         scanf("%s",nome);
 
                         menor = conta[0].saldo;
@@ -141,7 +143,7 @@ Menu de opções:
                         case 0:
                         break;
                         default:
-                            printf("\nOpcao Invalida!");
+                            printf("\nOp��o Invalida!");
                     }
             }
         }while(op != 0);
