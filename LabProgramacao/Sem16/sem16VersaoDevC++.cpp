@@ -3,10 +3,10 @@
 #include <locale.h>
 #define MAX 4 //Alterar o numero maximo de contas
 
-/*Fa�a um programa que realize o cadastro de contas banc�rias com as seguintes informa��es:n�mero
-da conta,nome do cliente e saldo.Obanco permitir�o cadastramento de apenas 15 contas e n�o poder� 
-haver mais que uma conta como mesmo n�mero. Crie o menu de op��es a seguir.
-Menu de op��es:
+/*Faca um programa que realize o cadastro de contas bancarias com as seguintes informcoes:numero
+da conta,nome do cliente e saldo.Obanco permitir�o cadastramento de apenas 15 contas e nao podera 
+haver mais que uma conta como mesmo n�mero. Crie o menu de opcoes a seguir.
+Menu de opcoes:
 1. Cadastrar contas.
 2. Visualizar todas as contas de determinado cliente.
 3. Excluir a conta com menor saldo(supondo a n�o exist�ncia de saldos iguais).
@@ -68,7 +68,7 @@ Menu de op��es:
             break;
             case 2:
                 char nome[50];
-                printf("\nDigite o nome do titular: \n ? ");
+                printf("\nDigite o nome do titular: \n ");
                 scanf("%s",nome);
                 for (int i = 0; i < MAX; i++) {
                         if(strcmp (c[i].titular, nome) == 0){
@@ -99,7 +99,7 @@ Menu de op��es:
 
         do {
             printf("\n|---------------------------------------------|\n");
-                printf("|               Menu de op��es:               |\n");
+                printf("|               Menu de opcoes:               |\n");
                 printf("|          0. Finalizar programa:             |\n");
                 printf("|           1. Cadastrar contas:              |\n");
                 printf("|      2. Visualizar contas dos clientes:     |\n");
@@ -117,7 +117,7 @@ Menu de op��es:
                 break;
                 case 2:
                     if(cont == 0){
-                        printf("\nNenhuma conta cadastrada at� o momento!\n");
+                        printf("\nNenhuma conta cadastrada ate o momento!\n");
                         break;
                     }else{
 
@@ -127,7 +127,7 @@ Menu de op��es:
                 case 3:
                     cont2 = 0;
                     if(cont == 0){
-                        printf("\nNenhuma conta cadastrada at� o momento!\n");
+                        printf("\nNenhuma conta cadastrada ate o momento!\n");
                         break;
                     }else{
                         
@@ -158,7 +158,7 @@ Menu de op��es:
                     case 0:
                     break;
                     default:
-                        printf("\nOp��o Invalida!");
+                        printf("\nOpcao Invalida!");
                         break;
             }
         }while(op != 0);
