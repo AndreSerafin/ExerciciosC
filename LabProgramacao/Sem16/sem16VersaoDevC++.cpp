@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <locale.h>
-#define MAX 15
-/*Faça um programa que realize o cadastro de contas bancárias com as seguintes informações:número
-da conta,nome do cliente e saldo.Obanco permitiráo cadastramento de apenas 15 contas e não poderá 
-haver mais que uma conta como mesmo número. Crie o menu de opções a seguir.
-Menu de opções:
+#define MAX 4 //Alterar o numero maximo de contas
+
+/*Faï¿½a um programa que realize o cadastro de contas bancï¿½rias com as seguintes informaï¿½ï¿½es:nï¿½mero
+da conta,nome do cliente e saldo.Obanco permitirï¿½o cadastramento de apenas 15 contas e nï¿½o poderï¿½ 
+haver mais que uma conta como mesmo nï¿½mero. Crie o menu de opï¿½ï¿½es a seguir.
+Menu de opï¿½ï¿½es:
 1. Cadastrar contas.
 2. Visualizar todas as contas de determinado cliente.
-3. Excluir a conta com menor saldo(supondo a não existência de saldos iguais).
+3. Excluir a conta com menor saldo(supondo a nï¿½o existï¿½ncia de saldos iguais).
 4. Sair.*/
 
     typedef struct {
@@ -31,7 +32,7 @@ Menu de opções:
         return c;
     }
 
-    void vizualizar(Contas c[MAX]) {
+    void vizualizar(Contas c[MAX], int cont) {
 
         int op;
         
@@ -47,12 +48,23 @@ Menu de opções:
 
         switch(op) {
             case 1:
+            if(cont == 0){
+
                 for (int i = 0; i < MAX; i++) {
                 printf("\nTitular: %s\n", c[i].titular);
                 printf("  Numero da conta: %d\n", c[i].numConta);
                 printf("  Saldo R$: %.2f\n", c[i].saldo);
 
                 }
+            }else{
+
+                for (int i = 0; i < cont; i++) {
+                printf("\nTitular: %s\n", c[i].titular);
+                printf("  Numero da conta: %d\n", c[i].numConta);
+                printf("  Saldo R$: %.2f\n", c[i].saldo);
+
+                }
+            }
             break;
             case 2:
                 char nome[50];
@@ -83,11 +95,11 @@ Menu de opções:
         
         int op;
         Contas conta[MAX];
-        int cont = 0;
+        int cont = 0, cont2 = 0;
 
         do {
             printf("\n|---------------------------------------------|\n");
-                printf("|               Menu de opções:               |\n");
+                printf("|               Menu de opï¿½ï¿½es:               |\n");
                 printf("|          0. Finalizar programa:             |\n");
                 printf("|           1. Cadastrar contas:              |\n");
                 printf("|      2. Visualizar contas dos clientes:     |\n");
@@ -105,46 +117,49 @@ Menu de opções:
                 break;
                 case 2:
                     if(cont == 0){
-                        printf("\nNenhuma conta cadastrada até o momento!\n");
+                        printf("\nNenhuma conta cadastrada atï¿½ o momento!\n");
                         break;
                     }else{
 
-                        vizualizar(conta);
+                        vizualizar(conta, cont2);
                         break;
                     }
                 case 3:
+                    cont2 = 0;
                     if(cont == 0){
-                        printf("\nNenhuma conta cadastrada até o momento!\n");
+                        printf("\nNenhuma conta cadastrada atï¿½ o momento!\n");
                         break;
                     }else{
                         
-                        int menor;
+                        double menor = __FLT_MAX__;
                         char nome[50];
-                        printf("\nDigite o nome do titular: \n ? ");
-                        scanf("%s",nome);
+                        int posicao = 0;
 
-                        menor = conta[0].saldo;
-
-                        for (int i = 1; i < MAX; i++) {
-                            for(int j = 1; j < MAX; j++){
-                                if(strcmp (conta[i].titular, nome) == 0 && conta[i].saldo < conta[j].saldo){
+                        for (int i = 0; i < MAX; i++) {
+                            if(conta[i].saldo < menor){
                                 menor = conta[i].saldo;
-                                }
+                                posicao = i;
+                                cont2++;
                             }
+                            
                         }
 
-                        for (int i = 1; i < MAX; i++) {
-                            if(menor == conta[i].saldo){
-                               conta[i].numConta = 0;
-                               conta[i].saldo = 0.0;
+
+                        if(menor == conta[posicao].saldo) {
+                            for (int i = posicao; i < MAX; i++) {
+                                conta[i] = conta[i + 1];
                             }
+                            
                         }
-                        break;
-                        case 0:
-                        break;
-                        default:
-                            printf("\nOpção Invalida!");
+
+                        conta[cont2].saldo = __FLT_MAX__;   
+                        
                     }
+                    case 0:
+                    break;
+                    default:
+                        printf("\nOpï¿½ï¿½o Invalida!");
+                        break;
             }
         }while(op != 0);
 
