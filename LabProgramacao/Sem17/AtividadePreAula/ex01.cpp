@@ -1,6 +1,6 @@
 #include <stdio.h>
 /*1. Faça um programa para criar um arquivo chamado ALUNOS.DAT,no qual cada Cadastro será composto pelos seguintes campos:numero,nome,curso,nota1,nota2.
-2. Faça um programa para incluir alunos no arquivo criado no Exercício1,lembrando que não podem existir dois alunos comomesmo número.
+2. Faça um programa para incluir alunos no arquivo criado no Exercício1.
 3. Faça um programa para alterar as notas dos alunos do arquivo criado no Exercício1.*/
 
 typedef struct {
@@ -47,20 +47,21 @@ void excluirArquivo(char arq[]) {
 void criarArquivo(char arq[]) {
 
     Cadastro aluno;
-    FILE *file = fopen(arq, "rb+");
+    FILE *file = fopen(arq, "ab");
 
     if(file != NULL) {
+        printf("\n Nome do aluno: \n • ");
+        fgets(aluno.nome, 50, stdin);
         printf(" Numero de matricula: \n • ");
         scanf("%d", &aluno.numero);
         getchar();
-        printf(" Nome do aluno: \n • ");
-        fgets(aluno.nome, 50, stdin);
         printf(" Curso: \n • ");
         fgets(aluno.curso, 50, stdin);
         printf(" Nota 1: \n • ");
         scanf("%f", &aluno.nota1);
         printf(" Nota 2: \n • ");
         scanf("%f", &aluno.nota2);
+        getchar();
         fwrite(&aluno,sizeof(Cadastro), 1, file);
         fclose(file);
 
@@ -81,12 +82,12 @@ void alterarArquivo(char arq[]) {
         printf("-------------------------");
         while(fread(&aluno, sizeof(Cadastro), 1, file)){
             
-            printf("\nIndice: %d\n", i);
-            printf("Numero: %d\n", aluno.numero);
-            printf("Nome: %s", aluno.nome);
-            printf("Curso: %s", aluno.curso);
-            printf("Nota1: %.2f\n", aluno.nota1);
-            printf("Nota2: %.2f\n", aluno.nota2);
+            printf("\nIndice: %d\n\n", i);
+            printf(" Numero: %d\n", aluno.numero);
+            printf(" Nome: %s", aluno.nome);
+            printf(" Curso: %s", aluno.curso);
+            printf(" Nota1: %.2f\n", aluno.nota1);
+            printf(" Nota2: %.2f\n", aluno.nota2);
             i++;
         }
         printf("-------------------------\n");
@@ -141,15 +142,12 @@ main() {
             case 1: {
                 printf("Digite a quantidade de alunos que deseja cadastrar: ");
                 scanf("%d", &n1);
-                printf("Digite o numero da matricula: ");
-                scanf("%d", &num2);
+                getchar();
                 
                 for(int i = 0; i < n1; i++) {
-                    if(num2 == num1[i]) {
-                        num1[i] = num2;
-                    }else{
-                        criarArquivo(arquivo);
-                    }
+                   
+                    criarArquivo(arquivo);
+                    
                 }
                 break;
             }
