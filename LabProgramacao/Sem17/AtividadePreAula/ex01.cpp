@@ -92,7 +92,7 @@ void alterarArquivo(char arq[]) {
         }
         printf("-------------------------\n");
 
-        printf("Digite o indice do cadastro que deseja alterar: ");
+        printf("Digite o indice do cadastro que deseja alterar as notas: ");
         scanf("%d", &id);
         getchar();
         id--;
