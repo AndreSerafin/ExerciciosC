@@ -1,4 +1,7 @@
 #include <stdio.h>
+/*1. Faça um programa para criar um arquivo chamado ALUNOS.DAT,no qual cada Cadastro será composto pelos seguintes campos:numero,nome,curso,nota1,nota2.
+2. Faça um programa para incluir alunos no arquivo criado no Exercício1,lembrando que não podem existir dois alunos comomesmo número.
+3. Faça um programa para alterar as notas dos alunos do arquivo criado no Exercício1.*/
 
 typedef struct {
 
@@ -24,6 +27,7 @@ void lerArquivo(char arq[]) {
                 printf("Curso: %s", aluno.curso);
                 printf("Nota1: %.2f\n", aluno.nota1);
                 printf("Nota2: %.2f\n", aluno.nota2);
+
             }
         }
         fclose(file);
@@ -31,7 +35,6 @@ void lerArquivo(char arq[]) {
     }else{
         printf("Erro ao abrir o arquivo!");
     }
-
 }
 
 void excluirArquivo(char arq[]) {
@@ -44,7 +47,7 @@ void excluirArquivo(char arq[]) {
 void criarArquivo(char arq[]) {
 
     Cadastro aluno;
-    FILE *file = fopen(arq, "ab");
+    FILE *file = fopen(arq, "rb+");
 
     if(file != NULL) {
         printf(" Numero de matricula: \n • ");
@@ -67,6 +70,47 @@ void criarArquivo(char arq[]) {
 
 }
 
+void alterarArquivo(char arq[]) {
+
+    FILE *file = fopen(arq, "rb+");
+    Cadastro aluno;
+    int i = 1, id;
+    
+    if(file != NULL) {
+        printf("\nLista de alunos: \n");
+        printf("-------------------------");
+        while(fread(&aluno, sizeof(Cadastro), 1, file)){
+            
+            printf("\nIndice: %d\n", i);
+            printf("Numero: %d\n", aluno.numero);
+            printf("Nome: %s", aluno.nome);
+            printf("Curso: %s", aluno.curso);
+            printf("Nota1: %.2f\n", aluno.nota1);
+            printf("Nota2: %.2f\n", aluno.nota2);
+            i++;
+        }
+        printf("-------------------------\n");
+
+        printf("Digite o indice do cadastro que deseja alterar: ");
+        scanf("%d", &id);
+        getchar();
+        id--;
+
+        if(id >= 0 && id < i - 1){
+            printf("Digite as novas notas: \n");
+            scanf("%f", &aluno.nota1);
+            scanf("%f", &aluno.nota2);
+            fseek(file, id * sizeof(Cadastro), SEEK_SET);
+            fwrite(&aluno, sizeof(Cadastro), 1, file);
+        }
+        fclose(file);
+
+
+    }else{
+        printf("Erro ao abrir o arquivo!");
+    }
+
+}
 main() {
 
     char arquivo[] = {"Alunos.dat"};
@@ -74,7 +118,7 @@ main() {
     
     int n1 = 0, n2 = 0;
     bool aux = false;
-    int op;
+    int op, num1[500], num2;
 
     do {
 
@@ -97,8 +141,15 @@ main() {
             case 1: {
                 printf("Digite a quantidade de alunos que deseja cadastrar: ");
                 scanf("%d", &n1);
+                printf("Digite o numero da matricula: ");
+                scanf("%d", &num2);
+                
                 for(int i = 0; i < n1; i++) {
-                    criarArquivo(arquivo);
+                    if(num2 == num1[i]) {
+                        num1[i] = num2;
+                    }else{
+                        criarArquivo(arquivo);
+                    }
                 }
                 break;
             }
@@ -107,7 +158,8 @@ main() {
                 break;
             }
             case 3: {
-                
+                alterarArquivo(arquivo);
+                break;
             }
             case 4: {   
                 lerArquivo(arquivo);
@@ -119,7 +171,6 @@ main() {
             }
                
         }
-
     }while(op != 0);
 
 }
