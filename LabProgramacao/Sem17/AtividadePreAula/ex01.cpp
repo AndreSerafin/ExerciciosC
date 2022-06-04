@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <vector>
+#include <algorithm>
 /*1. Faça um programa para criar um arquivo chamado ALUNOS.DAT,no qual cada Cadastro será composto pelos seguintes campos:numero,nome,curso,nota1,nota2.
 2. Faça um programa para incluir alunos no arquivo criado no Exercício1.
 3. Faça um programa para alterar as notas dos alunos do arquivo criado no Exercício1.*/
@@ -37,24 +39,22 @@ void lerArquivo(char arq[]) {
     }
 }
 
-void excluirArquivo(char arq[]) {
+void excluauxrquivo(char arq[]) {
     Cadastro aluno;
     FILE *file = fopen(arq, "wb");
 
     fclose(file);
 }
 
-void criarArquivo(char arq[]) {
+void criarArquivo(char arq[], int numMat) {
 
     Cadastro aluno;
     FILE *file = fopen(arq, "ab");
 
     if(file != NULL) {
-        printf("\n Nome do aluno: \n • ");
+        aluno.numero = numMat;
+        printf(" Nome do aluno: \n • ");
         fgets(aluno.nome, 50, stdin);
-        printf(" Numero de matricula: \n • ");
-        scanf("%d", &aluno.numero);
-        getchar();
         printf(" Curso: \n • ");
         fgets(aluno.curso, 50, stdin);
         printf(" Nota 1: \n • ");
@@ -112,6 +112,18 @@ void alterarArquivo(char arq[]) {
     }
 
 }
+
+bool contem(int num, std::vector<int> &v){
+    bool contem = false;
+    if (std::count(v.begin(), v.end(), num)) {
+        contem = true;
+    }else {
+        contem = false;
+    }
+
+    return contem;
+}
+
 main() {
 
     char arquivo[] = {"Alunos.dat"};
@@ -119,7 +131,8 @@ main() {
     
     int n1 = 0, n2 = 0;
     bool aux = false;
-    int op, num1[500], num2;
+    int op, num2, cont;
+    std::vector<int> numsMatricula;
 
     do {
 
@@ -143,17 +156,53 @@ main() {
                 printf("Digite a quantidade de alunos que deseja cadastrar: ");
                 scanf("%d", &n1);
                 getchar();
+
+                bool aux;
                 
                 for(int i = 0; i < n1; i++) {
-                   
-                    criarArquivo(arquivo);
-                    
+                    printf("\n Numero de matricula: \n • ");
+                    scanf("%d", &num2);
+                    getchar();
+
+                    aux = contem(num2, numsMatricula); 
+                    if (aux == true) {
+                        do{
+                            numsMatricula.push_back(num2);
+                            printf("\nInvalido!\nDigite um novo numero: ");
+                            scanf("%d", &num2);
+                            getchar();
+                            aux = contem(num2, numsMatricula);
+                            numsMatricula.push_back(num2);
+                        }while(aux != false);
+                        criarArquivo(arquivo, num2);
+                    }else{
+                        numsMatricula.push_back(num2);
+                        criarArquivo(arquivo,num2);
+                        }
                 }
                 break;
             }
-            case 2: {
-                criarArquivo(arquivo);
-                break;
+            case 2: {              
+                printf(" Numero de matricula: \n • ");
+                scanf("%d", &num2);
+                getchar();
+
+                aux = contem(num2, numsMatricula); 
+                if (aux == true) {
+                    do{
+                        numsMatricula.push_back(num2);
+                        printf("Invalido!\nDigite um novo numero: ");
+                        scanf("%d", &num2);
+                        getchar();
+                        aux = contem(num2, numsMatricula);
+                        numsMatricula.push_back(num2);
+                    }while(aux != false);
+                    criarArquivo(arquivo, num2);
+                }else{
+                    numsMatricula.push_back(num2);
+                    criarArquivo(arquivo,num2);
+                    }
+                
             }
             case 3: {
                 alterarArquivo(arquivo);
@@ -164,7 +213,7 @@ main() {
                 break;
             }
             case 5: {
-                excluirArquivo(arquivo);
+                excluauxrquivo(arquivo);
                 break;
             }
                
