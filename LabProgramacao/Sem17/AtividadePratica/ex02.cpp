@@ -50,45 +50,41 @@ std::vector<Documentos> registrarDocumentos() {
 
     for (int i = 0; i < n; i++) {
         Documentos d; 
-        printf("\nNumero do documento: \n • ");
+        printf("\nNumero do documento: \n . ");
         scanf("%d", &num);
 
         aux = contem(num, numsDocumentos);
 
         if(aux == true) {
-            int cont = 0;
             do{
                 numsDocumentos.push_back(num);
-                printf("Numero Invalido!\nDigite novamente: \n • ");
+                printf("Numero Invalido!\nDigite novamente: \n . ");
                 scanf("%d", &num);
                 aux = contem(num, numsDocumentos);
                 numsDocumentos.push_back(num);
                 d.numDocumento = num;
-                cont++;
-                if(cont > 10){
-                    break;
-                }
+                
             }while(aux == true);
         }else{
             numsDocumentos.push_back(num);         
             d.numDocumento = num;
         }
 
-        printf("Codigo do cliente: \n • ");
+        printf("Codigo do cliente: \n . ");
         scanf("%d", &d.codCliente);
-        printf("Data de vencimento (dd/mm/aaaa): \n • ");
+        printf("Data de vencimento (dd/mm/aaaa): \n . ");
         scanf("%d%*c%d%*c%d", &d.diaVenc, &d.mesVenc, &d.anoVenc);
         while(d.diaVenc > 31 || d.mesVenc > 12 || d.anoVenc < 0){
-            printf("Data Invalida!\nDigite novamente: \n • ");
+            printf("Data Invalida!\nDigite novamente: \n . ");
             scanf("%d%*c%d%*c%d", &d.diaVenc, &d.mesVenc, &d.anoVenc);                
         }
-        printf("Data de pagamento (dd/mm/aaaa): \n • ");
+        printf("Data de pagamento (dd/mm/aaaa): \n . ");
         scanf("%d%*c%d%*c%d", &d.diaPag, &d.mesPag, &d.anoPag);
         while(d.diaPag > 31 || d.mesPag > 12 || d.anoPag < 0){
-            printf("Data Invalida!\nDigite novamente: \n • ");
+            printf("Data Invalida!\nDigite novamente: \n . ");
             scanf("%d%*c%d%*c%d", &d.diaPag, &d.mesPag, &d.anoPag);                
         }
-        printf("Valor pago \n • ");
+        printf("Valor pago \n . ");
         scanf("%f", &d.valor);
         if(d.anoPag > d.anoVenc || d.mesPag > d.mesVenc){
             d.valor += (d.valor * 0.05);
@@ -118,7 +114,7 @@ std::vector<Clientes> registarClientes() {
 
     for(int i = 0; i < n; i++){
         Clientes c;
-        printf("\nCodigo do cliente:\n • ");
+        printf("\nCodigo do cliente:\n . ");
         scanf("%d", &cod);
         
         aux = contem(cod, codsClientes);
@@ -126,7 +122,7 @@ std::vector<Clientes> registarClientes() {
         if(aux == true) {
             do{
                 codsClientes.push_back(cod);
-                printf("Codigo Invalido!\nDigite novamente:\n • ");
+                printf("Codigo Invalido!\nDigite novamente:\n . ");
                 scanf("%d", &cod);
                 aux = contem(cod, codsClientes);
                 codsClientes.push_back(cod);
@@ -138,12 +134,12 @@ std::vector<Clientes> registarClientes() {
         }
 
         getchar();
-        printf("Nome do cliente:\n • ");
+        printf("Nome do cliente:\n . ");
         fgets(c.nome, sizeof(c.nome), stdin);
-        printf("Telefone:\n • ");
+        printf("Telefone:\n . ");
         scanf("%d", &c.telefone);
         getchar();
-        printf("Endereco:\n • ");
+        printf("Endereco:\n . ");
         fgets(c.endereco, sizeof(c.endereco), stdin);
         
         cliente.push_back(c);
