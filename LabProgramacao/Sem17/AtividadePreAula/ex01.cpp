@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <conio.h>
+//André Pereira dos Santos Serafin - 2120481
 /*1. Faça um programa para criar um arquivo chamado ALUNOS.DAT,no qual cada Cadastro será composto pelos seguintes campos:numero,nome,curso,nota1,nota2.
 2. Faça um programa para incluir alunos no arquivo criado no Exercício1.
 3. Faça um programa para alterar as notas dos alunos do arquivo criado no Exercício1.*/
