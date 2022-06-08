@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <vector>
 #include <algorithm>
+#include <conio.h>
 /*1. Faça um programa para criar um arquivo chamado ALUNOS.DAT,no qual cada Cadastro será composto pelos seguintes campos:numero,nome,curso,nota1,nota2.
 2. Faça um programa para incluir alunos no arquivo criado no Exercício1.
 3. Faça um programa para alterar as notas dos alunos do arquivo criado no Exercício1.*/
@@ -39,7 +40,7 @@ void lerArquivo(char arq[]) {
     }
 }
 
-void excluauxrquivo(char arq[]) {
+void excluirquivo(char arq[]) {
     Cadastro aluno;
     FILE *file = fopen(arq, "wb");
 
@@ -53,13 +54,13 @@ void criarArquivo(char arq[], int numMat) {
 
     if(file != NULL) {
         aluno.numero = numMat;
-        printf(" Nome do aluno: \n • ");
+        printf(" Nome do aluno: \n . ");
         fgets(aluno.nome, 50, stdin);
-        printf(" Curso: \n • ");
+        printf(" Curso: \n . ");
         fgets(aluno.curso, 50, stdin);
-        printf(" Nota 1: \n • ");
+        printf(" Nota 1: \n . ");
         scanf("%f", &aluno.nota1);
-        printf(" Nota 2: \n • ");
+        printf(" Nota 2: \n . ");
         scanf("%f", &aluno.nota2);
         getchar();
         fwrite(&aluno,sizeof(Cadastro), 1, file);
@@ -135,7 +136,7 @@ main() {
     std::vector<int> numsMatricula;
 
     do {
-
+        system("cls");
         printf("\n|---------------------------------|\n");
         printf("|          Menu de opcoes         |\n");
         printf("|     0. Finalizar programa:      |\n");
@@ -152,6 +153,7 @@ main() {
             case 0: {
                 break;
             }
+            system("cls");
             case 1: {
                 printf("Digite a quantidade de alunos que deseja cadastrar: ");
                 scanf("%d", &n1);
@@ -160,7 +162,7 @@ main() {
                 bool aux;
                 
                 for(int i = 0; i < n1; i++) {
-                    printf("\n Numero de matricula: \n • ");
+                    printf("\n Numero de matricula: \n . ");
                     scanf("%d", &num2);
                     getchar();
 
@@ -180,10 +182,12 @@ main() {
                         criarArquivo(arquivo,num2);
                         }
                 }
+                getch();
                 break;
             }
             case 2: {              
-                printf(" Numero de matricula: \n • ");
+                system("cls");
+                printf(" Numero de matricula: \n . ");
                 scanf("%d", &num2);
                 getchar();
 
@@ -201,19 +205,25 @@ main() {
                 }else{
                     numsMatricula.push_back(num2);
                     criarArquivo(arquivo,num2);
-                    }
+                }
                 
+                getch();
+                break;
             }
             case 3: {
+                system("cls");
                 alterarArquivo(arquivo);
                 break;
             }
             case 4: {   
+                system("cls");
                 lerArquivo(arquivo);
+                getch();
                 break;
             }
             case 5: {
-                excluauxrquivo(arquivo);
+                system("cls");
+                excluirquivo(arquivo);
                 break;
             }
                
