@@ -5,7 +5,8 @@
 //André Pereira dos Santos Serafin - 2120481
 /*1. Faça um programa para criar um arquivo chamado ALUNOS.DAT,no qual cada Cadastro será composto pelos seguintes campos:numero,nome,curso,nota1,nota2.
 2. Faça um programa para incluir alunos no arquivo criado no Exercício1.
-3. Faça um programa para alterar as notas dos alunos do arquivo criado no Exercício1.*/
+3. Faça um programa para alterar as notas dos alunos do arquivo criado no Exercício1.
+4. Faça um programa para alterar o curso dos alunos do arquivo criado no Exercício 1.*/
 
 typedef struct {
 
@@ -73,7 +74,7 @@ void criarArquivo(char arq[], int numMat) {
 
 }
 
-void alterarArquivo(char arq[]) {
+void alterarArquivoNotas(char arq[]) {
 
     FILE *file = fopen(arq, "rb+");
     Cadastro aluno;
@@ -103,6 +104,46 @@ void alterarArquivo(char arq[]) {
             printf("Digite as novas notas: \n");
             scanf("%f", &aluno.nota1);
             scanf("%f", &aluno.nota2);
+            fseek(file, id * sizeof(Cadastro), SEEK_SET);
+            fwrite(&aluno, sizeof(Cadastro), 1, file);
+        }
+        fclose(file);
+
+
+    }else{
+        printf("Erro ao abrir o arquivo!");
+    }
+
+}
+void alterarArquivoCurso(char arq[]) {
+
+    FILE *file = fopen(arq, "rb+");
+    Cadastro aluno;
+    int i = 1, id;
+    
+    if(file != NULL) {
+        printf("\nLista de alunos: \n");
+        printf("-------------------------");
+        while(fread(&aluno, sizeof(Cadastro), 1, file)){
+            
+            printf("\nIndice: %d\n\n", i);
+            printf(" Numero: %d\n", aluno.numero);
+            printf(" Nome: %s", aluno.nome);
+            printf(" Curso: %s", aluno.curso);
+            printf(" Nota1: %.2f\n", aluno.nota1);
+            printf(" Nota2: %.2f\n", aluno.nota2);
+            i++;
+        }
+        printf("-------------------------\n");
+
+        printf("Digite o indice do cadastro que deseja alterar o curso: ");
+        scanf("%d", &id);
+        getchar();
+        id--;
+
+        if(id >= 0 && id < i - 1){
+            printf("Digite o novo curso: \n");
+            fgets(aluno.curso, sizeof(aluno.curso),stdin);
             fseek(file, id * sizeof(Cadastro), SEEK_SET);
             fwrite(&aluno, sizeof(Cadastro), 1, file);
         }
@@ -144,8 +185,9 @@ main() {
         printf("|      1. Cadastrar alunos:       |\n");
         printf("|       2. Incluir alunos:        |\n");
         printf("|       3. Alterar notas:         |\n");
-        printf("|  4. Vizualizar todos cadastros: |\n");
-        printf("|   5. Excluir todos cadastros:   |\n");
+        printf("|       4. Alterar curso:         |\n");
+        printf("|  5. Vizualizar todos cadastros: |\n");
+        printf("|   6. Excluir todos cadastros:   |\n");
         printf("|---------------------------------|\n\n");
 
         scanf("%d", &op);
@@ -183,6 +225,7 @@ main() {
                         criarArquivo(arquivo,num2);
                         }
                 }
+                printf("\nPressione qualquer tecla para continuar! ");
                 getch();
                 break;
             }
@@ -208,21 +251,32 @@ main() {
                     criarArquivo(arquivo,num2);
                 }
                 
+                printf("\nPressione qualquer tecla para continuar! ");
                 getch();
                 break;
             }
             case 3: {
                 system("cls");
-                alterarArquivo(arquivo);
+                alterarArquivoNotas(arquivo);
+                getch();
+                printf("\nPressione qualquer tecla para continuar! ");
                 break;
             }
-            case 4: {   
+            case 4: {
                 system("cls");
-                lerArquivo(arquivo);
+                alterarArquivoCurso(arquivo);
+                printf("\nPressione qualquer tecla para continuar! ");
                 getch();
                 break;
             }
-            case 5: {
+            case 5: {   
+                system("cls");
+                lerArquivo(arquivo);
+                printf("\nPressione qualquer tecla para continuar! ");
+                getch();
+                break;
+            }
+            case 6: {
                 system("cls");
                 excluirquivo(arquivo);
                 break;
