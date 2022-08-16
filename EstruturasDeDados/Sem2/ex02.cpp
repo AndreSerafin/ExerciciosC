@@ -14,7 +14,24 @@ main() {
 
     n = (int *) (malloc(tam * sizeof(int)));
 
+    printf("Digite os %d numeros do vetor: ", tam);
     for (int i = 0; i < tam; i++) {
-        
+        scanf("%d", &n[i]);
     }
+
+    int pares=0,impares=0;
+
+    for (int i = 0; i < tam; i++) {
+        if (n[i] % 2 == 0) {
+            pares++;
+        }else {
+            impares++;
+        }
+    }
+
+    free(n);
+    
+    printf("%d sao pares\n", pares);
+    printf("%d sao impares\n", impares);
+    getche();
 }
