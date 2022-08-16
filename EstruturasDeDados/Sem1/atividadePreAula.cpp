@@ -116,7 +116,53 @@ void listaClientesERecebimentos(char arqCli[], char arqReceb[]){
     }
 }
 
-void excluiCliente(char arqCli[], char arqReceb[]){
+void alterarCliente(char arq[]) {
+
+    FILE *file = fopen(arq, "rb+");
+    Cliente cliente;
+    int i = 1, id;
+    
+    if(file != NULL) {
+        printf("\nLista de clientes: \n");
+        printf("-------------------------");
+        while(fread(&cliente, sizeof(Cliente), 1, file)){
+            
+            printf("\nIndice: %d\n\n", i);
+            printf("Codigo cliente: %d\n", cliente.cod_cli);
+            printf("Nome cliente: %s", cliente.nome);
+            printf("Endereco: %s", cliente.endereco);
+            i++;
+        }
+        printf("-------------------------\n");
+
+        printf("Digite o indice do cliente que deseja alterar: ");
+        scanf("%d", &id);
+        getchar();
+        id--;
+
+        if(id >= 0 && id < i - 1){
+            printf("Digite o novo cadastro: \n");
+            printf("Codigo Cliente: \n . ");
+            scanf("%d", &cliente.cod_cli);
+            printf("Nome: \n . ");
+            getchar();
+            fgets(cliente.nome, sizeof(cliente.nome),stdin);
+            printf("Endereco: \n . ");
+            fgets(cliente.endereco, sizeof(cliente.endereco),stdin);
+            fseek(file, id * sizeof(Cliente), SEEK_SET);
+            fwrite(&cliente, sizeof(Cliente), 1, file);
+        }
+        fclose(file);
+
+
+    }else{
+        printf("Erro ao abrir o arquivo!");
+    }
+
+}
+
+void excluiCliente(char arqCli[], char arqRec[]){
+    
     
     Cliente cliente;
     Recebimentos recebimentos;
@@ -126,14 +172,14 @@ void excluiCliente(char arqCli[], char arqReceb[]){
     char tempRec[] = {"tempRecebimentos.dat"};
 
     FILE *fcli = fopen(arqCli, "rb");
-    FILE *frec = fopen(arqReceb, "rb");
+    FILE *frec = fopen(arqRec, "rb");
 
-    FILE *fcli_temp = fopen(tempCli, "wb");
     FILE *frec_temp = fopen(tempRec, "wb");
+    FILE *fcli_temp = fopen(tempCli, "wb");
 
     if(fcli && frec != NULL) {
         
-        listaClientesERecebimentos(arqCli,arqReceb);
+        listaClientesERecebimentos(arqCli,arqRec);
 
         char nome[100];
         printf("Digite o nome do cliente que deseja excluir: ");
@@ -146,12 +192,26 @@ void excluiCliente(char arqCli[], char arqReceb[]){
                 fwrite(&cliente, sizeof(Cliente), 1, fcli_temp);
             }
         }
+
+        rewind(fcli);
+
+        while(!feof(fcli) && !feof(frec)){
+            rewind(frec);
+            fread(&cliente, sizeof(Cliente), 1, fcli);
+                fread(&recebimentos, sizeof(Recebimentos), 1, frec);
+                if(recebimentos.cod_cli != cliente.cod_cli) {
+                    fwrite(&recebimentos, sizeof(Recebimentos), 1, frec_temp);
+                }
+        }
+
         fclose(fcli);
         fclose(frec);
         fclose(fcli_temp);
+        fclose(frec_temp);
         remove(arqCli);
         rename(tempCli, arqCli);
-        
+        remove(arqRec);
+        rename(tempRec, arqRec);
     }
 }
 
@@ -172,8 +232,8 @@ main(){
         printf("|    2. Incluir recebimentos:     |\n");
         printf("| 3. Lista cliente e recebimento: |\n");
         printf("|      4. Excluir cliente:        |\n");
-        printf("| 4. Alterar cadastro de clientes:|\n");
-        printf("|  5. Excluir todos os registros: |\n");
+        printf("| 5. Alterar cadastro de clientes:|\n");
+        printf("|  6. Excluir todos os registros: |\n");
         printf("|---------------------------------|\n\n");
 
         scanf("%d", &op);
@@ -199,6 +259,9 @@ main(){
             excluiCliente(clientes, recebimentos);
             break;
         case 5:
+            system("cls");
+            alterarCliente(clientes);
+        case 6:
             system("cls");
             excluiArquivo(clientes);
             excluiArquivo(recebimentos);
