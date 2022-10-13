@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <conio.h>
 /*1-Cadastrar clientes no arquivo criado.
-2-Incluir recebimentos no arquivo criado.
+2-Incluir recebimento6s no arquivo criado.
 3-Excluir clientes e, consequentemente, todos os seus recebimentos, dos arquivos criados.
 4-Alterar o cadastro de clientes. O usuário deve informar o código do cliente que será alterado.*/
 
