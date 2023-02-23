@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <vector>
 #include <algorithm>
-#include <conio.h>
 //André Pereira dos Santos Serafin - 2120481
 /*1. Faça um programa para criar um arquivo chamado ALUNOS.DAT,no qual cada Cadastro será composto pelos seguintes campos:numero,nome,curso,nota1,nota2.
 2. Faça um programa para incluir alunos no arquivo criado no Exercício1.
@@ -167,7 +166,7 @@ bool contem(int num, std::vector<int> &v){
     return contem;
 }
 
-main() {
+int main() {
 
     char arquivo[] = {"Alunos.dat"};
     
@@ -178,7 +177,7 @@ main() {
     std::vector<int> numsMatricula;
 
     do {
-        system("cls");
+        system("clear");
         printf("\n|---------------------------------|\n");
         printf("|          Menu de opcoes         |\n");
         printf("|     0. Finalizar programa:      |\n");
@@ -196,7 +195,7 @@ main() {
             case 0: {
                 break;
             }
-            system("cls");
+            system("clear");
             case 1: {
                 printf("Digite a quantidade de alunos que deseja cadastrar: ");
                 scanf("%d", &n1);
@@ -226,11 +225,10 @@ main() {
                         }
                 }
                 printf("\nPressione qualquer tecla para continuar! ");
-                getch();
                 break;
             }
             case 2: {              
-                system("cls");
+                system("clear");
                 printf(" Numero de matricula: \n . ");
                 scanf("%d", &num2);
                 getchar();
@@ -252,36 +250,36 @@ main() {
                 }
                 
                 printf("\nPressione qualquer tecla para continuar! ");
-                getch();
+                
                 break;
             }
             case 3: {
-                system("cls");
+                system("clear");
                 alterarArquivoNotas(arquivo);
-                getch();
+                
                 printf("\nPressione qualquer tecla para continuar! ");
                 break;
             }
             case 4: {
-                system("cls");
+                system("clear");
                 alterarArquivoCurso(arquivo);
                 printf("\nPressione qualquer tecla para continuar! ");
-                getch();
+                
                 break;
             }
             case 5: {   
-                system("cls");
+                system("clear");
                 lerArquivo(arquivo);
                 printf("\nPressione qualquer tecla para continuar! ");
-                getch();
+                
                 break;
             }
             case 6: {
-                system("cls");
+                system("clear");
                 excluirquivo(arquivo);
                 break;
             }
-               
+            return 0;
         }
     }while(op != 0);
 
